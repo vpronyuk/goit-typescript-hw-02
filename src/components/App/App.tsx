@@ -14,15 +14,14 @@ import "../../styles/styles.css";
 const App: FC = () => {
   const [userQuery, setUserQuery] = useState<string>("");
   const [page, setPage] = useState<number>(1);
-  const { requestedImg, isLoading, isShowButton } = useImageLoader(
-    userQuery,
-    page
-  );
+  const { requestedImg, setRequestedImg, isLoading, isShowButton } =
+    useImageLoader(userQuery, page);
   const { selectedImg, isShowModal, onSelectImg, toggleModal } = useModal();
 
   const onFormSubmit = (query: string) => {
     setUserQuery(query);
     setPage(1);
+    setRequestedImg([]);
   };
 
   const handleLoadMore = () => {

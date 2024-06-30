@@ -24,11 +24,9 @@ const useImageLoader = (userQuery: string, page: number) => {
       setIsLoading(true);
 
       try {
-        const imagesData: FetchImagesResponse = await fetchImg(
-          userQuery,
-          page,
-          controller
-        );
+        const imagesData = await fetchImg(userQuery, page, controller);
+        const typedImagesData: FetchImagesResponse =
+          imagesData as FetchImagesResponse;
 
         if (
           !imagesData ||
@@ -38,8 +36,8 @@ const useImageLoader = (userQuery: string, page: number) => {
           throw new Error("No data from server!");
         }
 
-        setRequestedImg((prevState) => [...prevState, ...imagesData.hits]);
-        setIsShowButton(page < Math.ceil(imagesData.totalHits / 12));
+        setRequestedImg((prevState) => [...prevState, ...typedImagesData.hits]);
+        setIsShowButton(page < Math.ceil(typedImagesData.totalHits / 12));
       } catch (error) {
         console.log(error);
       } finally {
@@ -56,7 +54,7 @@ const useImageLoader = (userQuery: string, page: number) => {
     };
   }, [userQuery, page]);
 
-  return { requestedImg, isLoading, isShowButton };
+  return { requestedImg, setRequestedImg, isLoading, isShowButton };
 };
 
 export default useImageLoader;
