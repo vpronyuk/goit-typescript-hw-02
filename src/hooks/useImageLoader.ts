@@ -29,8 +29,7 @@ const useImageLoader = (userQuery: string, page: number) => {
           page,
           controller
         );
-        // const typedImagesData: FetchImagesResponse =
-        //   imagesData as FetchImagesResponse;
+
         if (
           !imagesData ||
           !Array.isArray(imagesData.hits) ||
