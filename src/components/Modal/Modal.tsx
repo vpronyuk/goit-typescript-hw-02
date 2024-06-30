@@ -9,6 +9,7 @@ interface ModalProps {
 const Modal: FC<ModalProps> = ({ onClose, selectedImg }) => {
   useEffect(() => {
     const handleKeyDown = (evt: KeyboardEvent) => {
+      console.log(`Key pressed: ${evt.key}`);
       if (evt.key === "Escape") {
         onClose();
       }

@@ -1,14 +1,15 @@
 import { FC, useState } from "react";
-import "../../styles/styles.css";
 
-import ImageGallery from "../ImageGallery/ImageGallery";
 import Searchbar from "../SearchBar/Searchbar";
+import ImageGallery from "../ImageGallery/ImageGallery";
 import Loader from "../Loader/Loader";
 import Button from "../Button/Button";
 import Modal from "../Modal/Modal";
 
 import useImageLoader from "../../hooks/useImageLoader";
 import useModal from "../../hooks/useModal";
+
+import "../../styles/styles.css";
 
 const App: FC = () => {
   const [userQuery, setUserQuery] = useState<string>("");
