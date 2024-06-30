@@ -48,7 +48,7 @@ const fetchImg = async (
   userQuery: string,
   page: number,
   controller: AbortController
-): Promise<ImageResponse | []> => {
+): Promise<ImageResponse> => {
   const params = {
     key: "33618284-b943b6a3bf9edd3f9e88f078b",
     q: userQuery,
@@ -66,12 +66,20 @@ const fetchImg = async (
         signal: controller.signal,
       }
     );
+
+    if (
+      !response.data ||
+      !Array.isArray(response.data.hits) ||
+      typeof response.data.totalHits !== "number"
+    ) {
+      throw new Error("Invalid data format from server");
+    }
     return response.data;
   } catch (error) {
     if (controller.signal.aborted) {
       console.log("Fetch aborted");
     } else console.error(error);
-    return [];
+    throw error;
   }
 };
 

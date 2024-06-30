@@ -8,6 +8,11 @@ interface ImageData {
   largeImageURL: string;
 }
 
+interface FetchImagesResponse {
+  hits: ImageData[];
+  totalHits: number;
+}
+
 const useImageLoader = (userQuery: string, page: number) => {
   const [requestedImg, setRequestedImg] = useState<ImageData[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -19,9 +24,18 @@ const useImageLoader = (userQuery: string, page: number) => {
       setIsLoading(true);
 
       try {
-        const imagesData = await fetchImg(userQuery, page, controller);
-
-        if (!imagesData || imagesData.hits.length === 0) {
+        const imagesData: FetchImagesResponse = await fetchImg(
+          userQuery,
+          page,
+          controller
+        );
+        // const typedImagesData: FetchImagesResponse =
+        //   imagesData as FetchImagesResponse;
+        if (
+          !imagesData ||
+          !Array.isArray(imagesData.hits) ||
+          imagesData.hits.length === 0
+        ) {
           throw new Error("No data from server!");
         }
 
