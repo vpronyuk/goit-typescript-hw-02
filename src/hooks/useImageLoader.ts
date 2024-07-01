@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import fetchImg from "../services/fetch";
 
-interface ImageData {
+export interface ImageData {
   id: number;
-  webformatURL: string;
   tags: string;
+  webformatURL: string;
   largeImageURL: string;
 }
 

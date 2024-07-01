@@ -1,13 +1,9 @@
 import { FC } from "react";
 import ImageGalleryItem from "../ImageGalleryItem/ImageGalleryItem";
+import { ImageData } from "../../hooks/useImageLoader";
 
 interface ImageGalleryProps {
-  requestedImg: {
-    id: number;
-    webformatURL: string;
-    tags: string;
-    largeImageURL: string;
-  }[];
+  requestedImg: ImageData[];
   onSelect: (url: string) => void;
 }
 
